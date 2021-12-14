@@ -15,9 +15,6 @@ const Roster = ({roster, teams}) => {
         const response = await fetch(netsRosterUrl)
         if(response.ok) {
           let jsonResponse = await response.json()
-          // console.log(jsonResponse)
-
-
           setPlayers(jsonResponse.t.pl)
           setTeamData(
             {
@@ -58,7 +55,7 @@ export default Roster
 
 const Container = styled.div`
   // min-height: 100vh;
-  max-width: 1280px;
+  max-width: 1310px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -78,18 +75,19 @@ const Container = styled.div`
 
 const PlayerGrid = styled.div`
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto;
   grid-column-gap: 20px;
+  grid-row-gap: 20px;
   min-width: 100%;
   margin: 0 auto;
+  // grid-column-gap: 0px;
 
-  @media(max-width: 1012px) {
+  @media(min-width: 1029px) {
     grid-template-columns: auto auto;
-    grid-column-gap: 10px;
+    // grid-column-gap: 10px;
   }
 
-  @media(max-width: 544px) {
-    grid-template-columns: auto;
-    grid-column-gap: 0px;
+  @media(min-width: 1365px) {
+    grid-template-columns: auto auto auto;
   }
 `

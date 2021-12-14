@@ -13,6 +13,9 @@ const Header = () => {
         </a>
         <NavMenu id="navLinks">
           <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
             <a href="/news">News</a>
           </li>
           <li>

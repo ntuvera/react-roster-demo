@@ -4,7 +4,8 @@ import styled from "styled-components"
 const Footer = () => {
   return (
     <Container>
-      <span> Footer here</span>
+      <p>&copy; 2021 </p>
+      <p>API provided by <a href="http://www.nba.com/"> NBA.com</a></p>
     </Container>
   )
 }
@@ -13,14 +14,22 @@ export default Footer;
 
 const Container = styled.div`
   position: fixed;
-  color:  #FFF;
-  background: #000;
   bottom: 0px;
   width:  100%;
-  height: 5rem;
+  height: 3rem;
+  color:  #FFF;
+  font-size: 12px;
+  background: #000;
   text-align: center;
+  margin: 0 auto;
+  padding-top: 1rem;
 
-  span {
-    margin: 1em;
+  p {
+    position: relative;
+    bottom: 1em;
+  }
+
+  a {
+    text-decoration: none;
   }
 `

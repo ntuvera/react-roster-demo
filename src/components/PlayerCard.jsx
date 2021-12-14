@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 // import { useModal } from "../hooks/useModal"
+import bwLogo from "../../src/images/brooklyn_nets_logo_bw.png"
 
 const PlayerCard = ({ player, team }) => {
   const [playerData, setPlayerData] = useState(null)
@@ -9,13 +10,11 @@ const PlayerCard = ({ player, team }) => {
     const fetchPlayerData = async () => {
       const apiUrl = 'https://data.nba.com/data/v2015/json/mobile_teams/nba/2021/teams/nets/player_averages_02.json'
 
-      // console.log(`playerCard: player prop ${typeof player.pid}`)
       try{
         const response = await fetch(apiUrl)
         if(response.ok) {
           let jsonResponse = await response.json()
           const playerStats = await jsonResponse.tpsts.pl.filter(playerObj => parseInt(playerObj.pid) === player.pid)
-          console.log(playerStats)
           let playerWithStats = {...player, ...playerStats[0]}
           setPlayerData(await playerWithStats)
         }
@@ -40,6 +39,43 @@ const PlayerCard = ({ player, team }) => {
     "SG": "Shooting Guard",
   }
 
+  const createCardFront = (info) => {
+    const data = info;
+    return (
+      <PlayerDetails class="details">
+        <div class="height">
+          <label>Height</label>
+          {data.ht}
+        </div>
+        <div class="weight">
+          <label>Weight</label>
+          {data.wt}
+        </div>
+        <div class="dob">
+          <label>Date of Birth</label>
+          {data.dob}
+          </div>
+        <div class="year">
+          <label>Experience</label>
+          {data.y}
+        </div>
+        <div class="twc">
+          <label>TWC?</label>
+          {data.twc}
+        </div>
+        <div class="hcc">
+          <label>Last Attended</label>
+          {data.hcc}
+        </div>
+      </PlayerDetails>
+    )
+  }
+
+  // const createCardBack = (stats) => {
+
+  //   const data = stats;
+  // }
+
   return (
     <Container>
       <Player>
@@ -48,13 +84,8 @@ const PlayerCard = ({ player, team }) => {
         backgroundRepeat: `no-repeat`,
         backgroundSize: `cover`,
         }}>
+        <TeamLogo src={bwLogo}/>
         <Infographic>
-          <ImageContainer class="playerImage">
-            {/* <img src={`https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/1610612751/2021/260x190/${player.pid}.png`} alt={`${player.ln}-hs`}/> */}
-          </ImageContainer>
-          <TeamLogo>
-            {/* <h2>place logo here</h2> */}
-          </TeamLogo> 
           <PlayerInfo class="playerInfo">
             <div class="teamName">{`${team.tc} ${team.tn}`}</div>
             <div class="jerseyNumber">#{player.num}</div>
@@ -65,7 +96,8 @@ const PlayerCard = ({ player, team }) => {
           </PlayerInfo>
         </Infographic>
       </Splash>
-      <PlayerDetails>
+
+      <PlayerDetails class="details">
         <div class="height">
           <label>Height</label>
           {player.ht}
@@ -77,22 +109,23 @@ const PlayerCard = ({ player, team }) => {
         <div class="dob">
           <label>Date of Birth</label>
           {player.dob}
-        <div class="year"></div>
+          </div>
+        <div class="year">
           <label>Experience</label>
           {player.y}
         </div>
         <div class="twc">
-        <label>TWC?</label>
-        {player.twc}
+          <label>TWC?</label>
+          {player.twc}
         </div>
         <div class="hcc">
           <label>Last Attended</label>
-       {player.hcc}
+          {player.hcc}
         </div>
       </PlayerDetails>
+
       <div class="stats">
         <Stats>
-          {console.log(playerData)}
           <div class="gamePoints">
             <label>Games played</label>
             {playerData?.avg?.gp}
@@ -160,12 +193,11 @@ const PlayerCard = ({ player, team }) => {
 export default PlayerCard
 
 const Container = styled.div`
-  // display: grid;
   width: 350px;
-  // border: 1px solid black;
-  margin: 20px;
+  margin: 0 auto;
 `
 const Splash = styled.div`
+  position: relative;
   width: 100%;
   height: 250px;
   background: rgba(0,0,0,0.75);
@@ -179,28 +211,26 @@ const Splash = styled.div`
 `
 const Player = styled.div`
   width: 350px;
-  border-radius: 8px
-
-  &.stats {
-    width: 390px;
-  }
-
 `
 const Infographic = styled.div`
   width:  100%
 `
-const ImageContainer = styled.div`
+const TeamLogo = styled.img`
+  position: absolute;
+  width:  125px;
+  left: 5px;
+  opacity: 0.25;
 `
-const TeamLogo = styled.div``
 const PlayerInfo = styled.div`
-  // display:  inline-block
+  display: grid;
+  grid-template-columns: auto;
   text-align: right;
 `
-// maybe do a grid template here?
 const PlayerDetails = styled.div`
-  display:  inline-block;
+  display:  flex;
+  flex-direction: column;
   min-width: 390px;
-  min-height: 525px;
+  min-height: 550px;
   color: #FFF;
   background-color: rgba(0, 0, 0, 0.9);
 
@@ -208,29 +238,31 @@ const PlayerDetails = styled.div`
     display: block;
   }
   div {
+    flex: 1 1 0px;
     border: 1px solid white;
+    border-color: #FFF;
+    border-style: solid;
+    border-width: 1px 0 1px 0;
   }
+
 `
 const Stats = styled.div`
+  display: flex;
+  flex-direction: column;
   color: #FFF;
   background: rgba(0,0,0,0.75);
   min-width: 390px;
-  min-height: 525px;
+  min-height: 550px;
+
   label {
     display: block;
   }
+
+  div {
+    flex: 1 1 0px;
+    border: 1px solid white;
+    border-color: #FFF;
+    border-style: solid;
+    border-width: 1px 0 1px 0;
+  }
 `
-// const ModalContainer = styled.div`
-//   background: #000;
-//   padding: 16px;
-//   overflow: auto;
-//   position: relative;
-//   top: 50px;
-//   margin-bottom: 50px;
-//   padding: 48px 20px;
-//   @media (min-width: 768px}) {
-//     width: 744px;
-//     padding: 48px;
-//     top: 0;
-//   }
-// `
