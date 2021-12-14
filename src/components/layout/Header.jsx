@@ -57,10 +57,10 @@ const NavBar = styled.nav`
 `
 
 const NavMenu = styled.ul`
-  position: absolute;
-  bottom: 10px;
-  // margin: 0 auto;
+  position: relative;
+  top: 100px;
   list-style: none;
+  float:  right;
 
   #navLinks li {
     display: inline;

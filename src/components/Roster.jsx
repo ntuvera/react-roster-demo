@@ -68,9 +68,6 @@ const Container = styled.div`
     padding-top: 64px;
   }
 
-  // @media (max-width: 1367px) {
-  // }
-
 `
 
 const PlayerGrid = styled.div`
@@ -87,7 +84,7 @@ const PlayerGrid = styled.div`
     // grid-column-gap: 10px;
   }
 
-  @media(min-width: 1365px) {
+  @media(min-width: 1485px) {
     grid-template-columns: auto auto auto;
   }
 `

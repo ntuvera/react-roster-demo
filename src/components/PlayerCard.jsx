@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
-// import { useModal } from "../hooks/useModal"
 import bwLogo from "../../src/images/brooklyn_nets_logo_bw.png"
 
 const PlayerCard = ({ player, team }) => {
@@ -39,37 +38,38 @@ const PlayerCard = ({ player, team }) => {
     "SG": "Shooting Guard",
   }
 
-  const createCardFront = (info) => {
-    const data = info;
-    return (
-      <PlayerDetails class="details">
-        <div class="height">
-          <label>Height</label>
-          {data.ht}
-        </div>
-        <div class="weight">
-          <label>Weight</label>
-          {data.wt}
-        </div>
-        <div class="dob">
-          <label>Date of Birth</label>
-          {data.dob}
-          </div>
-        <div class="year">
-          <label>Experience</label>
-          {data.y}
-        </div>
-        <div class="twc">
-          <label>TWC?</label>
-          {data.twc}
-        </div>
-        <div class="hcc">
-          <label>Last Attended</label>
-          {data.hcc}
-        </div>
-      </PlayerDetails>
-    )
-  }
+  // NOTE: future iteration using Flip Card with css to display data
+  // const createCardFront = (info) => {
+  //   const data = info;
+  //   return (
+  //     <PlayerDetails class="details">
+  //       <div class="height">
+  //         <label>Height</label>
+  //         {data.ht}
+  //       </div>
+  //       <div class="weight">
+  //         <label>Weight</label>
+  //         {data.wt}
+  //       </div>
+  //       <div class="dob">
+  //         <label>Date of Birth</label>
+  //         {data.dob}
+  //         </div>
+  //       <div class="year">
+  //         <label>Experience</label>
+  //         {data.y}
+  //       </div>
+  //       <div class="twc">
+  //         <label>TWC?</label>
+  //         {data.twc}
+  //       </div>
+  //       <div class="hcc">
+  //         <label>Last Attended</label>
+  //         {data.hcc}
+  //       </div>
+  //     </PlayerDetails>
+  //   )
+  // }
 
   // const createCardBack = (stats) => {
 
@@ -79,112 +79,111 @@ const PlayerCard = ({ player, team }) => {
   return (
     <Container>
       <Player>
-      <Splash style={{ 
-        backgroundImage: `url(https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/1610612751/2021/260x190/${player.pid}.png)`,
-        backgroundRepeat: `no-repeat`,
-        backgroundSize: `cover`,
-        }}>
-        <TeamLogo src={bwLogo}/>
-        <Infographic>
-          <PlayerInfo class="playerInfo">
-            <div class="teamName">{`${team.tc} ${team.tn}`}</div>
-            <div class="jerseyNumber">#{player.num}</div>
-            <div class="position">{positionKey[player.pos]}</div>
-            <div class="firstName"><h2>{player.fn}</h2></div>
-            <div class="lastName"><h2>{player.ln}</h2></div>
-            <div class="miscIcon"></div>
-          </PlayerInfo>
-        </Infographic>
-      </Splash>
+        <Splash style={{ 
+          backgroundImage: `url(https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/1610612751/2021/260x190/${player.pid}.png)`,
+          backgroundRepeat: `no-repeat`,
+          backgroundSize: `cover`,
+          }}>
+          <TeamLogo src={bwLogo}/>
+          <Infographic>
+            <PlayerInfo class="playerInfo">
+              <div class="teamName">{`${team.tc} ${team.tn}`}</div>
+              <div class="jerseyNumber">#{player.num}</div>
+              <div class="position">{positionKey[player.pos]}</div>
+              <div class="firstName"><h2>{player.fn}</h2></div>
+              <div class="lastName"><h2>{player.ln}</h2></div>
+              <div class="miscIcon"></div>
+            </PlayerInfo>
+          </Infographic>
+        </Splash>
+      <Info>
+        <PlayerDetails class="details">
+          <div class="height">
+            <label>Height</label>
+            {player.ht}
+          </div>
+          <div class="weight">
+            <label>Weight</label>
+            {player.wt}
+          </div>
+          <div class="dob">
+            <label>Date of Birth</label>
+            {player.dob}
+            </div>
+          <div class="year">
+            <label>Experience</label>
+            {player.y}
+          </div>
+          <div class="twc">
+            <label>TWC?</label>
+            {player.twc}
+          </div>
+          <div class="hcc">
+            <label>Last Attended</label>
+            {player.hcc}
+          </div>
+        </PlayerDetails>
 
-      <PlayerDetails class="details">
-        <div class="height">
-          <label>Height</label>
-          {player.ht}
-        </div>
-        <div class="weight">
-          <label>Weight</label>
-          {player.wt}
-        </div>
-        <div class="dob">
-          <label>Date of Birth</label>
-          {player.dob}
-          </div>
-        <div class="year">
-          <label>Experience</label>
-          {player.y}
-        </div>
-        <div class="twc">
-          <label>TWC?</label>
-          {player.twc}
-        </div>
-        <div class="hcc">
-          <label>Last Attended</label>
-          {player.hcc}
-        </div>
-      </PlayerDetails>
+          <Stats>
+            <div class="gamePoints">
+              <label>Games played</label>
+              {playerData?.avg?.gp}
+            </div>
+            <div class="">
+              <label>Minutes Played</label>
+              {playerData?.avg?.min}
+            </div>
+            <div class="gs">
+              <label>? gs ?</label>
+              {playerData?.avg?.gs}
+            </div>
+            <div class="fieldGoalPercentage">
+              <label>Field Goal Percentage</label>
+              {playerData?.avg?.fgp}
+            </div>
+            <div class="ttp">
+              <label>? ttp ?</label>
+              {playerData?.avg?.gp}
+            </div>
+            <div class="offensiveRebounds">
+              <label>Offensive Rebounds</label>
+              {playerData?.avg?.oreb}
+            </div>
+            <div class="defensiveRebounds">
+              <label>Defensive Rebounds</label>
+              {playerData?.avg?.dreb}
+            </div>
+            <div class="rebounds">
+              <label>Rebounds</label>
+              {playerData?.avg?.reb}
+            </div>
+            <div class="assists">
+              <label>Assists</label>
+              {playerData?.avg?.ast}
+            </div>
+            <div class="steals">
+              <label>Steals</label>
+              {playerData?.avg?.stl}
+            </div>
+            <div class="blocks">
+              <label>Blocks</label>
+              {playerData?.avg?.blk}
+            </div>
+            <div class="turnovers">
+              <label>Turnovers</label>
+              {playerData?.avg?.tov}
+            </div>
+            <div class="personalFouls">
+              <label>personalFouls</label>
+              {playerData?.avg?.pf}
+            </div>
+            <div class="points">
+              <label>Points</label>
+              {playerData?.avg?.pts}
+            </div>
 
-      <div class="stats">
-        <Stats>
-          <div class="gamePoints">
-            <label>Games played</label>
-            {playerData?.avg?.gp}
-          </div>
-          <div class="">
-            <label>Minutes Played</label>
-            {playerData?.avg?.min}
-          </div>
-          <div class="gs">
-            <label>? gs ?</label>
-            {playerData?.avg?.gs}
-          </div>
-          <div class="fieldGoalPercentage">
-            <label>Field Goal Percentage</label>
-            {playerData?.avg?.fgp}
-          </div>
-          <div class="ttp">
-            <label>? ttp ?</label>
-            {playerData?.avg?.gp}
-          </div>
-          <div class="offensiveRebounds">
-            <label>Offensive Rebounds</label>
-            {playerData?.avg?.oreb}
-          </div>
-          <div class="defensiveRebounds">
-            <label>Defensive Rebounds</label>
-            {playerData?.avg?.dreb}
-          </div>
-          <div class="rebounds">
-            <label>Rebounds</label>
-            {playerData?.avg?.reb}
-          </div>
-          <div class="assists">
-            <label>Assists</label>
-            {playerData?.avg?.ast}
-          </div>
-          <div class="steals">
-            <label>Steals</label>
-            {playerData?.avg?.stl}
-          </div>
-          <div class="blocks">
-            <label>Blocks</label>
-            {playerData?.avg?.blk}
-          </div>
-          <div class="turnovers">
-            <label>Turnovers</label>
-            {playerData?.avg?.tov}
-          </div>
-          <div class="personalFouls">
-            <label>personalFouls</label>
-            {playerData?.avg?.pf}
-          </div>
-          <div class="points">
-            <label>Points</label>
-            {playerData?.avg?.pts}
-          </div>
-
-        </Stats>
-      </div>
+          </Stats>
+        </Info>
       </Player>
     </Container>
   )
@@ -209,11 +208,9 @@ const Splash = styled.div`
     postion: absolute;
   }
 `
-const Player = styled.div`
-  width: 350px;
-`
+const Player = styled.div` `
 const Infographic = styled.div`
-  width:  100%
+  text-align: right;
 `
 const TeamLogo = styled.img`
   position: absolute;
@@ -224,7 +221,9 @@ const TeamLogo = styled.img`
 const PlayerInfo = styled.div`
   display: grid;
   grid-template-columns: auto;
-  text-align: right;
+`
+const Info = styled.div`
+  text-align: center;
 `
 const PlayerDetails = styled.div`
   display:  flex;
